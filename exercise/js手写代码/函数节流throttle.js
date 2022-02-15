@@ -9,3 +9,37 @@
  * 缩放场景：监控浏览器resize
  * 动画场景：避免短时间内多次触发动画引起性能问题
  */
+
+
+function debounce(fn, timeout) {
+  let timer;
+  return function () {
+    if (timer) {
+      if (new Date().getTime() - timer > timeout) {
+        // timer = undefined
+        fn.call(this, arguments)
+        timer = undefined;
+      }
+    } else {
+      timer = new Date().getTime()
+    }
+  }
+}
+
+// 函数节流的实现;
+function throttle(fn, delay) {
+  let curTime = Date.now();
+
+  return function() {
+    let context = this,
+      args = arguments,
+      nowTime = Date.now();
+
+    // 如果两次时间间隔超过了指定时间，则执行函数。
+    if (nowTime - curTime >= delay) {
+      curTime = Date.now();
+      return fn.apply(context, args);
+    }
+  };
+}
+

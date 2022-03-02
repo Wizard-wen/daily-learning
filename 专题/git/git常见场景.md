@@ -2,8 +2,7 @@
 
 ## 场景1 本地已存在的git仓库关联到remote仓库时报错
 
-### 场景还原1
-
+### case1
 将本地仓库手动设置远程仓库地址
 
 ```shell
@@ -16,7 +15,11 @@ $git remote add origin https://github.com/xxx/xxx
 
 > 出现这个问题的最主要原因还是在于本地仓库和远程仓库实际上是独立的两个仓库
 
-### 场景还原2
+```shell
+git push origin -u XXXX
+```
+
+### case2
 
 pull request时提示
 > github显示There isn’t anything to compare.
@@ -37,6 +40,21 @@ git merge branchWaitingForMerge
 
 ## 场景3 删除分支上已存在的文件
 
+
+- 本地不删除，但是想从git中删除
+
+```shell
+# 先执行git rm 
+git rm -r --cached XXX
+# 然后将删除的文件放入.gitignore中
+# 然后执行commit操作
+```
+- 本地和远程同时删除
+
+```shell
+git rm -r XXX
+# 然后执行commit操作
+```
 
 ## 场景4 git版本回退
 
